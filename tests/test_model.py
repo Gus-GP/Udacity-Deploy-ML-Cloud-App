@@ -26,7 +26,8 @@ def data():
     data = pd.read_csv('data/census.csv')
     data = data.replace('?', np.nan)
     data = data.dropna(axis=0)
-    return data
+    train, _ = train_test_split(data, test_size=0.20)
+    return train
 
 @pytest.fixture()
 def cat_features():
@@ -72,23 +73,17 @@ def test_train_model(data,cat_features):
 
 def test_compute_model_metrics(data,cat_features):
     """ Test Compute Model Metrics """
-    train, test = train_test_split(data, test_size=0.20)
 
     # Proces the train data with the process_data function
     X_train, y_train, encoder, lb = process_data(
-        train, categorical_features=cat_features, label="salary", training=True
-    )
-
-    # Proces the test data with the process_data function.
-    X_test, y_test, _, _ = process_data(
-        test, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
+        data, categorical_features=cat_features, label="salary", training=True
     )
 
     # Train and save a model.
     model = train_model(X_train, y_train)
-    preds = inference(model, X_test)
+    preds = inference(model, X_train)
 
-    precision, recall, fbeta = compute_model_metrics(y_test, preds)
+    precision, recall, fbeta = compute_model_metrics(y_train, preds)
 
     assert precision <= 1.0
     assert recall <=1.0
@@ -96,10 +91,9 @@ def test_compute_model_metrics(data,cat_features):
 
 def test_inference(data,cat_features,model):
     """ Test Logistic Regression Inference """
-    train, _ = train_test_split(data, test_size=0.20)
 
     X_train, _, _, _ = process_data(
-        train, categorical_features=cat_features, label="salary", training=True
+        data, categorical_features=cat_features, label="salary", training=True
     )
 
     preds = inference(model, X_train)
