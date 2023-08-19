@@ -62,6 +62,12 @@ class InferenceInput(BaseModel):
             }
         }
         
+@app.on_event("startup")
+async def startup_event(): 
+    global model, encoder, binarizer
+    model = pickle.load(open("model/LogisticRegressionModel.pkl", "rb"))
+    encoder = pickle.load(open("model/Encoder.pkl", "rb"))
+    binarizer = pickle.load(open("model/LinearBinarizer.pkl", "rb"))
 
 @app.get("/")
 async def get_greetings():
@@ -80,9 +86,6 @@ async def post_inference(inference_input: InferenceInput) -> Dict:
     -------
     Inference_prediction (Dict) : Predicted salary <=50K or >50K
     """
-    model = pickle.load(open('model/LogisticRegressionModel.pkl', 'rb'))
-    encoder = pickle.load(open('model/Encoder.pkl', 'rb'))
-    lb = pickle.load(open('model/LinearBinarizer.pkl', 'rb'))
     # Replace python naming convention to match census. Dictionary comprehension
     # code adapted from https://stackoverflow.com/questions/4406501/change-the-name-of-a-key-in-dictionary
     inference_input = {feature.replace('_', '-'): value for feature, value in inference_input.dict().items()}
