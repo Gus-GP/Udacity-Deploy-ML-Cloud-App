@@ -64,10 +64,10 @@ class InferenceInput(BaseModel):
         
 @app.on_event("startup")
 async def startup_event(): 
-    global model, encoder, binarizer
+    global model, encoder, lb
     model = pickle.load(open("model/LogisticRegressionModel.pkl", "rb"))
     encoder = pickle.load(open("model/Encoder.pkl", "rb"))
-    binarizer = pickle.load(open("model/LinearBinarizer.pkl", "rb"))
+    lb = pickle.load(open("model/LinearBinarizer.pkl", "rb"))
 
 @app.get("/")
 async def get_greetings():
