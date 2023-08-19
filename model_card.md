@@ -10,7 +10,7 @@ The model task is to classify whether income exceeds, is equal, or below $50K/yr
 
 ## Training Data
 
-The data comes from the [Unoversity of California Irvine Machine Learning Repository](https://archive.ics.uci.edu/dataset/20/census+income). For data cleaning, white spaces and tuples with null attributes were removed. For data pre-processing, a one hot encoder was used for features and a label binarizer was used for labels.
+The data comes from the [University of California Irvine Machine Learning Repository](https://archive.ics.uci.edu/dataset/20/census+income). For data cleaning, white spaces and tuples with null attributes were removed. For data pre-processing, a one hot encoder was used for features and a label binarizer was used for labels.
 
 ## Evaluation Data
 
@@ -36,4 +36,4 @@ This prediction tool should NOT be used to make predictions solely based on some
 
 ## Caveats and Recommendations
 
-The main goal for this project is not to produce the best prediction model but gain practice using MLOps tools. Therefore, the data cleaning, data processing, and model optimization procedures are minimal. The data is messy and requires a more in depth cleaning approach in order to produce better results. Different models should be tested for prediction (e.g. Decision Trees, Random Forests) and compared to select a model that performs best with this data set.
+The main goal for this project is not to produce the best prediction model but gain practice using MLOps tools. Therefore, the data cleaning, data processing, and model optimization procedures are minimal. The data is messy and requires a more in-depth cleaning approach in order to produce better results. Different models should be tested for prediction (e.g. Decision Trees, Random Forests) to select a model that performs best with this data set.
