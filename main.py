@@ -1,5 +1,5 @@
 """
-API Code
+ML application API Logic
 
 Author: Gustavo Grinsteins
 Date Created: 08/18/2023
@@ -9,7 +9,6 @@ import pickle
 import pandas as pd
 from typing import Dict
 from fastapi import FastAPI
-from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from starter.ml.data import process_data
 from starter.ml.model import inference
@@ -68,20 +67,21 @@ class InferenceInput(BaseModel):
 
 # Define a GET on the specified endpoint
 @app.get("/")
-async def say_hello():
+async def get_greetings():
     return {"Greetings": "Welcome to the Income Prediction Tool (***Used for education purposes only***)"}
 
 @app.post("/inference/")
-async def do_inference(inference_input: InferenceInput) -> Dict:
+async def post_inference(inference_input: InferenceInput) -> Dict:
     """
     Do model inference on census tuple to predict salary.
 
     Inputs
     ------
     inference_input (InferenceInput) : census data for one profile
+
     Returns
     -------
-    (Dict) : Predicted salary <=50K or >50K
+    Inference_prediction (Dict) : Predicted salary <=50K or >50K
     """
     model = pickle.load(open('model/LogisticRegressionModel.pkl', 'rb'))
     encoder = pickle.load(open('model/Encoder.pkl', 'rb'))

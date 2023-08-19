@@ -22,7 +22,6 @@ from starter.ml.model import train_model, compute_model_metrics, inference, outp
 @pytest.fixture()
 def data():
     """ Create test access to data """
-    # Add code to load in the data.
     data = pd.read_csv('data/census.csv')
     data = data.replace('?', np.nan)
     data = data.dropna(axis=0)
@@ -74,12 +73,10 @@ def test_train_model(data,cat_features):
 def test_compute_model_metrics(data,cat_features):
     """ Test Compute Model Metrics """
 
-    # Proces the train data with the process_data function
     X_train, y_train, encoder, lb = process_data(
         data, categorical_features=cat_features, label="salary", training=True
     )
 
-    # Train and save a model.
     model = train_model(X_train, y_train)
     preds = inference(model, X_train)
 
