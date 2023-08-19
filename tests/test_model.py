@@ -53,14 +53,14 @@ def model():
 @pytest.fixture()
 def encoder():
     """ Create test access to Encoder"""
-    model = pickle.load(open('model/Encoder.pkl', 'rb'))
-    return model
+    encoder = pickle.load(open('model/Encoder.pkl', 'rb'))
+    return encoder
 
 @pytest.fixture()
 def lb():
     """ Create test access to Linear Binarizer"""
-    model = pickle.load(open('model/LinearBinarizer.pkl', 'rb'))
-    return model
+    lb = pickle.load(open('model/LinearBinarizer.pkl', 'rb'))
+    return lb
 
 def test_train_model(data,cat_features):
     """ Test Train Model """
@@ -89,16 +89,16 @@ def test_compute_model_metrics(data,cat_features):
     assert recall <=1.0
     assert fbeta <=1.0
 
-def test_inference(data,cat_features,model):
+def test_inference(data,cat_features,model,encoder,lb):
     """ Test Logistic Regression Inference """
 
-    X_train, _, _, _ = process_data(
-        data, categorical_features=cat_features, label="salary", training=True
+    X, _, _, _ = process_data(
+        data, categorical_features=cat_features, label='salary', training=False, encoder=encoder, lb=lb
     )
 
-    preds = inference(model, X_train)
+    preds = inference(model, X)
 
-    assert len(preds) == len(X_train)
+    assert len(preds) == len(X)
 
 def test_output_metrics_by_slice(data,cat_features,model,encoder,lb):
     """ Test That The Output txt file for sliced metrics exists """
