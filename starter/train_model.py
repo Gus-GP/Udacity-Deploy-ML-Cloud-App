@@ -14,10 +14,9 @@ from ml.model import train_model, compute_model_metrics, inference, output_metri
 
 
 if __name__ == "__main__":
-    # Add code to load in the data.
+
     data = pd.read_csv('../data/census.csv')
     
-    # Data Pre processing: Remove missing values represente by '?'
     data = data.replace('?', np.nan)
     data = data.dropna(axis=0)
 

@@ -19,6 +19,7 @@ def train_model(X_train, y_train):
         Training data.
     y_train : np.array
         Labels.
+
     Returns
     -------
     model
@@ -31,7 +32,7 @@ def train_model(X_train, y_train):
 
 def compute_model_metrics(y, preds):
     """
-    Validates the trained machine learning model using precision, recall, and F1.
+    Validates the trained machine learning model using precision, recall, and Fbeta.
 
     Inputs
     ------
@@ -39,6 +40,7 @@ def compute_model_metrics(y, preds):
         Known labels, binarized.
     preds : np.array
         Predicted labels, binarized.
+
     Returns
     -------
     precision : float
@@ -60,6 +62,7 @@ def inference(model, X):
         Trained machine learning model.
     X : np.array
         Data used for prediction.
+        
     Returns
     -------
     preds : np.array
@@ -83,9 +86,11 @@ def output_metrics_by_slice(df,
         - encoder (sklearn.preprocessing.OneHotEncoder): fitted One Hot Encoder
         - lb (sklearn.preprocessing.LabelBinarizer): label binarizer
         - cat_features (list): list of categorical columns
+
     Returns
     -------
         - None
+        
     File Output
     -------
         - slice_output.txt

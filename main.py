@@ -24,10 +24,8 @@ CAT_FEATURES = [
         "native-country",
     ]
 
-# Instantiate the app
 app = FastAPI()
 
-# Declare the data object with its components and their type.
 class InferenceInput(BaseModel):
     age: int
     workclass: str
@@ -65,7 +63,6 @@ class InferenceInput(BaseModel):
         }
         
 
-# Define a GET on the specified endpoint
 @app.get("/")
 async def get_greetings():
     return {"Greetings": "Welcome to the Income Prediction Tool (***Used for education purposes only***)"}

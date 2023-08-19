@@ -6,7 +6,7 @@ Gustavo Grinsteins created the model. It uses a logistic regression algorithm us
 
 ## Intended Use
 
-The model task is to classify whether income exceeds $50K/yr based on 1996 census data. The development and use of this model was intended as a learning activity.
+The model task is to classify whether income exceeds, is equal, or below $50K/yr based on 1996 census data. The development and use of this model was intended as a learning activity.
 
 ## Training Data
 
